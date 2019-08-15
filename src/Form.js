@@ -39,14 +39,14 @@ class Form extends React.Component {
     render()  {
             
         return (
-            <div>
+            <form className="form" onSubmit={this.onSubmit}>
                 {
                     this.props.input.map(el => {
                         //return input for every el
                         if(el.id === "name") {
                             return (
-                                <>
-                                    <label htmlFor={el.id}>{el.label}</label>
+                                <div key={el.id}>
+                                    <label className="label" htmlFor={el.id}>{el.label}</label>
                                     <input 
                                         placeholder={el.type}
                                         id={el.id}
@@ -54,35 +54,36 @@ class Form extends React.Component {
                                         pattern="\S+ \S+.*"
                                         onInput={(event) => {this.handleInput(event.target.value, el.id)}} 
                                     />
-                                </>
+                                </div>
                             );
                         } else if(el.id === "dob") {
                             return (
-                                <>
-                                    <label htmlFor={el.id}>{el.label}</label>
+                                <div key={el.id}>
+                                    <label className="label" htmlFor={el.id}>{el.label}</label>
                                     <input 
                                         placeholder={el.type}
                                         id={el.id}
                                         required                                       
                                     />
-                                </>
+                                </div>
                             );
                         } else if (el.id === "gender") {
                             return (
-                                <>
-                                    <label htmlFor={el.id}>{el.label}</label>
+                                <div key={el.id}>
+                                    <label className="label" htmlFor={el.id}>{el.label}</label>
                                     <select name={el.name}>
                                         <option value="1">Male</option>
                                         <option value="2">Female</option>
                                     </select>
-                                </>
+                                </div>
                             );
                         }
+                        return false;
                     })
                     
                 }
-                <button type='submit' onClick={this.onSubmit}>Submit</button>
-            </div>
+                <button className="submit" type='submit'>Submit</button>
+            </form>
         );
     }    
 }
