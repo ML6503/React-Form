@@ -12,7 +12,7 @@ class Form extends React.Component {
         this.state = {
             Name: {},
             DOB: {},
-            Gender:{},
+            Gender: 1,
         };
 
         this.onSubmit=this.onSubmit.bind(this);
@@ -22,6 +22,7 @@ class Form extends React.Component {
     onSubmit(event) {
         event.preventDefault();
         console.log(this.state);
+        alert('output: ' + JSON.stringify(this.state));
     }
 
     handleInput(input, id) {
@@ -52,18 +53,25 @@ class Form extends React.Component {
                                         id={el.id}
                                         required
                                         pattern="\S+ \S+.*"
+                                        type={el.type}
                                         onInput={(event) => {this.handleInput(event.target.value, el.id)}} 
                                     />
                                 </div>
                             );
                         } else if(el.id === "dob") {
+                            const minAge = 18;
+                            const d = new Date();
+                            d.setFullYear(d.getFullYear() - minAge);
                             return (
                                 <div key={el.id}>
                                     <label className="label" htmlFor={el.id}>{el.label}</label>
                                     <input 
                                         placeholder={el.type}
                                         id={el.id}
-                                        required                                       
+                                        required
+                                        type={el.type}
+                                        max={d.toJSON().slice(0, 10)} 
+                                        onInput={(event) => {this.handleInput(event.target.value, el.id)}}                                        
                                     />
                                 </div>
                             );
@@ -71,7 +79,12 @@ class Form extends React.Component {
                             return (
                                 <div key={el.id}>
                                     <label className="label" htmlFor={el.id}>{el.label}</label>
-                                    <select name={el.name}>
+                                    <select 
+                                    className="genderbox" 
+                                    name={el.name}
+                                    value={this.state.Gender.value}
+                                    onChange={(event) => {this.handleInput(event.target.value, el.id)}}
+                                    >
                                         <option value="1">Male</option>
                                         <option value="2">Female</option>
                                     </select>
