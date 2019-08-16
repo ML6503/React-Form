@@ -1,6 +1,5 @@
 import React from 'react';
 
-
 // to create Form class with state
 // this Form to get from props input json with Name, DOB, Gender
 // and to have Submit button
@@ -40,16 +39,18 @@ class Form extends React.Component {
     render()  {
             
         return (
-            <form className="form" onSubmit={this.onSubmit}>
+            <form className="form" onSubmit={this.onSubmit} data-testid="form">
                 {
                     this.props.input.map(el => {
                         //return input for every el
                         if(el.id === "name") {
                             return (
-                                <div key={el.id}>
+                                <div key={el.id} className="input-wrapper">
                                     <label className="label" htmlFor={el.id}>{el.label}</label>
                                     <input 
-                                        placeholder={el.type}
+                                        className="input"
+                                        data-testid="input-name"
+                                        placeholder={el.label}
                                         id={el.id}
                                         required
                                         pattern="\S+ \S+.*"
@@ -63,9 +64,11 @@ class Form extends React.Component {
                             const d = new Date();
                             d.setFullYear(d.getFullYear() - minAge);
                             return (
-                                <div key={el.id}>
+                                <div key={el.id} className="input-wrapper">
                                     <label className="label" htmlFor={el.id}>{el.label}</label>
                                     <input 
+                                        className="input"
+                                        data-testid="input-dob"
                                         placeholder={el.type}
                                         id={el.id}
                                         required
@@ -77,14 +80,17 @@ class Form extends React.Component {
                             );
                         } else if (el.id === "gender") {
                             return (
-                                <div key={el.id}>
+                                <div key={el.id} className="input-wrapper">
                                     <label className="label" htmlFor={el.id}>{el.label}</label>
-                                    <select 
-                                    className="genderbox" 
+                                    <select
+                                    data-testid="input-gender" 
+                                    className="input" 
                                     name={el.name}
+                                    id={el.id}
                                     value={this.state.Gender.value}
                                     onChange={(event) => {this.handleInput(event.target.value, el.id)}}
-                                    >
+                                    >   
+                                        <option value="0">---</option>
                                         <option value="1">Male</option>
                                         <option value="2">Female</option>
                                     </select>

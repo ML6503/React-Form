@@ -6,7 +6,7 @@ const input = require('./input.json');
 
 function App() {
   return (
-    <div className="App">
+    <div className="App" data-testid="app-screen">
       <header className="App-header">
         <h4>React Form</h4>
         <div className="wrapper">

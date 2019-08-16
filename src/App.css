@@ -44,22 +44,50 @@
   justify-content: flex-start;
   min-height: 60vh;
   width: 800px;
+  margin: 0 auto;
+}
+
+.input-wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  margin: 15px;
+}
+
+.input {
+  width: 80%;
+  padding-inline-start: 0;
+}
+
+input[type="date"],
+select,
+::placeholder {
+  font-size: 16px;
+  padding-left: 5px;
+  color: grey;
 }
 
 .label {
-  padding: .5em;
-  align-self: flex-end;
+  padding: 5px;
+  text-align: start;
+  font-size: smaller;
+  width: 20%;
 }
 
 /* .form {
   align-items: flex-end;
 } */
 
-.submit {
-  margin: 1em 0;
-  padding: .25em 1em;
+h4 {
+  margin-top: 0;
 }
 
-.genderbox {
-  flex-basis: 200px;
+.submit {
+  margin: 15px;
+  padding: .6em 2em;
+  font-size: calc(10px + 1vmin);
+  background: transparent;
+  border: 2px solid white;
+  color: white;
 }
