@@ -12,7 +12,7 @@ class Form extends React.Component {
         this.state = {
             Name: {},
             DOB: {},
-            Gender: 1,
+            Gender: {},
         };
 
         this.onSubmit=this.onSubmit.bind(this);
