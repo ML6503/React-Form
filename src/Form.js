@@ -1,4 +1,15 @@
 import React from 'react';
+import Name from './Components/Name';
+import DOB from './Components/DOB';
+import Gender from './Components/Gender';
+import ErrorBoundary from './ErrorBoundary';
+
+const componentsLabels = {
+    name: Name,
+    dob: DOB,
+    gender: Gender,
+};
+
 
 // to create Form class with state
 // this Form to get from props input json with Name, DOB, Gender
@@ -16,6 +27,7 @@ class Form extends React.Component {
 
         this.onSubmit=this.onSubmit.bind(this);
         this.handleInput=this.handleInput.bind(this);
+        this.renderComponent = this.renderComponent.bind(this);
     }
 
     onSubmit(event) {
@@ -36,70 +48,20 @@ class Form extends React.Component {
         
     }
 
+    renderComponent(c) {
+        const InputComponent = componentsLabels[c.id];
+        return (
+            <ErrorBoundary key={c.id}>
+                <InputComponent  {...c} handleInput={this.handleInput}/>
+            </ErrorBoundary>
+        );
+    }
+
     render()  {
-            
         return (
             <form className="form" onSubmit={this.onSubmit} data-testid="form">
                 {
-                    this.props.input.map(el => {
-                        //return input for every el
-                        if(el.id === "name") {
-                            return (
-                                <div key={el.id} className="input-wrapper">
-                                    <label className="label" htmlFor={el.id}>{el.label}</label>
-                                    <input 
-                                        className="input"
-                                        data-testid="input-name"
-                                        placeholder={el.label}
-                                        id={el.id}
-                                        required
-                                        pattern="\S+ \S+.*"
-                                        type={el.type}
-                                        onInput={(event) => {this.handleInput(event.target.value, el.id)}} 
-                                    />
-                                </div>
-                            );
-                        } else if(el.id === "dob") {
-                            const minAge = 18;
-                            const d = new Date();
-                            d.setFullYear(d.getFullYear() - minAge);
-                            return (
-                                <div key={el.id} className="input-wrapper">
-                                    <label className="label" htmlFor={el.id}>{el.label}</label>
-                                    <input 
-                                        className="input"
-                                        data-testid="input-dob"
-                                        placeholder={el.type}
-                                        id={el.id}
-                                        required
-                                        type={el.type}
-                                        max={d.toJSON().slice(0, 10)} 
-                                        onInput={(event) => {this.handleInput(event.target.value, el.id)}}                                        
-                                    />
-                                </div>
-                            );
-                        } else if (el.id === "gender") {
-                            return (
-                                <div key={el.id} className="input-wrapper">
-                                    <label className="label" htmlFor={el.id}>{el.label}</label>
-                                    <select
-                                    data-testid="input-gender" 
-                                    className="input" 
-                                    name={el.name}
-                                    id={el.id}
-                                    value={this.state.Gender.value}
-                                    onChange={(event) => {this.handleInput(event.target.value, el.id)}}
-                                    >   
-                                        <option value="0">---</option>
-                                        <option value="1">Male</option>
-                                        <option value="2">Female</option>
-                                    </select>
-                                </div>
-                            );
-                        }
-                        return false;
-                    })
-                    
+                    this.props.input.map(el => this.renderComponent(el))
                 }
                 <button className="submit" type='submit'>Submit</button>
             </form>
