@@ -2,7 +2,6 @@ import React from 'react';
 import Name from './Components/Name';
 import DOB from './Components/DOB';
 import Gender from './Components/Gender';
-import ErrorBoundary from './ErrorBoundary';
 
 const componentsLabels = {
     name: Name,
@@ -50,11 +49,7 @@ class Form extends React.Component {
 
     renderComponent(c) {
         const InputComponent = componentsLabels[c.id];
-        return (
-            <ErrorBoundary key={c.id}>
-                <InputComponent  {...c} handleInput={this.handleInput}/>
-            </ErrorBoundary>
-        );
+        return <InputComponent key={c.id} {...c} handleInput={this.handleInput}/>
     }
 
     render()  {
