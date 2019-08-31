@@ -1,5 +1,10 @@
 [
     { "id": "name", "type": "text", "label": "Name" },
     { "id": "dob", "type": "date", "label": "DOB" },
-    { "id": "gender", "type": "gender", "label": "Gender" }
+    { "id": "gender", "type": "gender", "label": "Gender" },
+    { "id": "contact", "telOptions": [
+        {"key": "mobile", "type": "text", "label": "Mobile"},
+        {"key": "home", "type": "text", "label": "Home"}]
+    },
+    { "id": "guardian", "type": "checkbox", "label": "Guardian" }
 ]

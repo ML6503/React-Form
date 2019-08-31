@@ -16,6 +16,7 @@ const badInput = [
 afterEach(cleanup)
 
 test('ErrorBoundary works correctly', () => {
+    const onInput = jest.fn();
     const { getByTestId, rerender } = render(<Name />)
     rerender(<Name label="badName" type="car" />);
     expect(getByTestId('error')).toBeTruthy();

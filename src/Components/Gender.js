@@ -1,12 +1,11 @@
 import React from 'react';
 
-const Gender = ({ id, label, name, value, handleInput }) => (
+const Gender = ({ id, label, value, handleInput }) => (
 <div key={id} className="input-wrapper">
     <label className="label" htmlFor={id}>{label}</label>
     <select
     data-testid="input-gender" 
     className="input" 
-    name={name}
     id={id}
     value={value}
     onChange={(event) => {handleInput(event.target.value, id)}}

@@ -2,11 +2,15 @@ import React from 'react';
 import Name from './Components/Name';
 import DOB from './Components/DOB';
 import Gender from './Components/Gender';
+import Contacts from './Components/Contacts';
+import Guardian from './Components/Guardian';
 
 const componentsLabels = {
     name: Name,
     dob: DOB,
     gender: Gender,
+    contact: Contacts,
+    guardian: Guardian,
 };
 
 
@@ -22,6 +26,8 @@ class Form extends React.Component {
             Name: {},
             DOB: {},
             Gender: {},
+            Contacts: [],
+            Guardian: {},
         };
 
         this.onSubmit=this.onSubmit.bind(this);
@@ -43,8 +49,13 @@ class Form extends React.Component {
             this.setState({DOB: input})
         } else if (id === 'gender') {
             this.setState({Gender: input})
+        } else if (id === 'mobile') {
+            this.setState({Contacts: [...this.state.Contacts, {mobile: input}]})
+        } else if (id === 'home') {
+            this.setState({Contacts: [...this.state.Contacts, {home: input}]})
+        } else if (id === 'guardian' ) {
+            this.setState({Guardian: input})
         }
-        
     }
 
     renderComponent(c) {
